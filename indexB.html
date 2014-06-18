@@ -1,0 +1,445 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Gradient test
+    </title>
+    <!--<link rel="stylesheet" href="">-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans|Montserrat' rel='stylesheet' type='text/css'>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <style>
+you best. If you're more of the copy-and-paste type, or just want an in-page preview of what you'll be getting, here it is.
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/* the end of reset  */
+    body  {
+      background:#dcd8d0;
+      margin: 0;
+      padding:0;
+      font-family: 'Open Sans', sans-serif;;
+
+    }
+
+    #wrapper {
+      background:#FFFFFF;
+      width:1000px;
+      margin:0 auto;
+      margin-top:0;
+      padding:0;
+    }
+
+    #content-wrapper {
+
+      width:900px;
+      margin: 0 auto;
+    }
+    #anim-wrapper {
+
+     /* border:1px solid black; */
+      position: relative;
+      padding:0; margin:0;
+      width:673px; height:336px;
+      background:#000000;
+      float:left;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    #pattern_canvas {
+      position:absolute;
+      z-index:2000;
+    }
+
+    #gradient_canvas2 {
+      position: absolute;
+      z-index: 1998;
+    }
+    #gradient_canvas {
+      position:absolute;
+      z-index: 1999;
+
+    }
+
+    #banner-h1 {
+      //position:absolute;
+      //z-index:2001;
+      color:#003745;
+      top:80px;
+      left:430px;
+      letter-spacing: -0.5px;
+      line-height: 120%;
+      font-size:32px;
+      font-family: 'Montserrat';
+      margin-bottom: 20px;
+
+    }
+    #banner-cap {
+
+      //position: absolute;
+      //z-index: 2002;
+      color:#003745;
+      left:430px;
+      top:205px;
+      font-size:13px;
+       letter-spacing: -0.5px;
+      line-height: 120%;  
+      margin-bottom: 20px;
+      }
+
+    #banner-cta {
+      position: absolute;
+      z-index: 2003;
+      color:#FFF;
+      background:#f04e23;
+      left:430px;
+      top:275px;
+      padding-left:14px;padding-right:14px;
+      padding-top:8px;padding-bottom:8px;
+      letter-spacing: 0px;
+      font-size: 14px;
+
+    }
+
+    #banner-cta a {
+      text-decoration: none;
+    }
+
+    #banner-copy-wrap {
+   
+      position:absolute;
+      left:430px;
+      top:80px;
+      z-index: 2004;
+
+    }
+
+    .d219right {
+
+      width:219px;
+      height:164px;
+      background: #003745;
+      float:right;
+      margin-bottom:8px;
+      padding:0;
+
+
+    }
+
+    .d219left {
+
+      width:219px;
+      height:164px;
+      background: #003745;
+      float:left;
+      margin-right:8px;
+      margin-bottom:8px;
+      padding:0;
+
+    }
+    .d900 {
+
+      width:900px;
+      /*height: 140px; */
+      /*background:#dbdbdb;*/
+      float:left;
+      clear:both;
+
+      margin-bottom:8px;
+    }
+
+    .d446left {
+      width:446px;
+      height:336px;
+      float:right;
+      background: #003745;
+      padding:0;
+    }
+
+
+    .clearfix:after {
+         content: " "; /* Older browser do not support empty content */
+         visibility: hidden;
+         display: block;
+         height: 0;
+         clear: both;
+    }
+
+
+    p , ul li{
+      font-size:12.5px;
+      line-height: 120%;
+    }
+    ul li {
+      line-height: 140%;
+    }
+    ul  {
+      list-style-type: square;
+    padding-left:15px;
+
+    }
+
+    .menu {
+      list-style-type:none;
+      margin:auto;
+      float:right;
+      padding-right: 0;
+
+    }
+    .menu li {
+      float:left
+      ;
+    }
+    .menu a {
+      font-size: 14px;
+      font-weight: bolder;
+      padding-right:12px;
+      padding-left: 12px;
+      display:block;
+      text-decoration: none;
+      color:#003745;
+    }
+
+    .foot-text {
+       font-size:12px;
+       color:#5c5c5c;
+
+    }
+
+    </style>
+  </head>
+  <body>
+    <div id="wrapper" class="clearfix">
+      
+      <div id="content-wrapper" class="clearfix">
+          
+
+          <div class="d900" class="clearfix" style="background:#FFFFFF;"> 
+              <div style="float:right;margin:15px;margin-right:0;background:#dbdbdb"><input class="search-box" id="" name="search_block_form" value="Search" size="15" maxlength="128" type="search"></div>
+            
+          </div>
+
+          <div class="d900" class="clearfix" style="background:#FFF;padding-bottom:24px;"> 
+              <img src="icg_logo.jpg"/>
+              <div style="margin:15px;margin-right:0;float:right"><ul class="menu"><li><a href="#">About ICG</a></li><li><a href="#">Our Team</a></li><li><a href="#">Our funds</a></li>
+               <li><a href="#">Investments</a></li><li><a href="#">Shareholders</a></li><li><a href="#" style="padding-right:0">News</a></li> 
+
+              </ul></div>
+          </div>
+       
+
+        <div id="anim-wrapper">
+          <canvas id="gradient_canvas" width="673" height="336"></canvas>
+    
+
+          <canvas id="pattern_canvas" width="673" height="336"></canvas>
+          <div id="banner-copy-wrap">
+              <div id="banner-h1">The<br/>architecture<br/>of finance </div>
+
+              <div id="banner-cap">At ICG we look at opportunities across</br>
+                                      the capital structure, to connect</br> 
+                                      businesses to their long-term ambitions. </div>
+
+             
+          </div>
+           <a href="https://www.google.co.uk/?search=#q=icg&safe=off" target="_blank"><div id="banner-cta"> Find out how</div></a>
+
+
+        </div>
+
+        <!-- 2 modules -->
+
+        <div class="d219right">
+          <div style="margin:15px; color:#FFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam nibh vel neque lacinia, sed ultrices tellus tristique. Donec sit amet augue erat. Cras aliquet, augue a commodo suscipit</p>
+         </div>
+        </div>
+
+        <div class="d219right" style="background:#dcd8d0">
+          <div style="margin:15px;">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+           <p>Curabitur viverra arcu quis rutrum convallis. Etiam suscipit, lectus sit amet sollicitudin dictum, tellus justo convallis est, posuere imperdiet est sapien vel lorem. </p>
+         </div>
+        </div>
+
+        <!-- end of 2 modules -->
+
+        <!-- 4 moodules -->
+
+          <div class="d219left">
+          <div style="margin:15px;color:#FFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+             <p>Nam vel leo eu massa rhoncus porttitor. Etiam neque magna, congue in urna semper
+         </p>  <p>
+         Morbi ac condimentum justo, eget rhoncus ante. 
+         </p>
+         </div>
+
+        </div>
+
+
+         <div class="d219left" style="background:#dcd8d0">
+          <div style="margin:15px;">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+         
+            <ul> 
+              <li>Duis pretium feugiat augue</li><li>Quisque blandit lacinia </li>    <li>Ut iaculis ante ac dictum</li><li>Praesent velit lectus, mollis vel, dignissim vel ipsum.</li>
+            </ul>
+        
+         </div>
+
+        </div>
+
+          <div class="d219left" style="background:#f04e23">
+          <div style="margin:15px; color:#FFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+           <p><i>Quisque ut massa quis libero consectetur ultricies.  </i></p>
+           <p><i>Mauris vitae mi non ipsum molestie viverra. </i></p>
+         </div>
+        </div>
+
+
+         <div class="d219left" style="margin:0">
+          <div style="margin:15px; color:#FFF">
+          <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+
+          <p> Ut iaculis ante ac dictum bibendum. </p>
+          <p> Proin congue vitae ipsum eu blandit. Proin dapibus neque sit amet rutrum faucibus.   </p>
+         </div>
+        </div>
+
+        <!--- the end of 4 modules -->
+
+                <!-- 4 moodules -->
+
+          <div class="d219left">
+          <div style="margin:15px;color:#FFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+           <p >Ut in nisi at sapien pellentesque condimentum. Fusce accumsan elit at sapien mollis hendrerit. Nam cursus vitae nulla vel feugiat.</p>
+         </div>
+        </div>
+
+
+         <div class="d219left">
+          <div style="margin:15px;color:#FFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+              <p >Ut in nisi at sapien pellentesque condimentum. Fusce accumsan elit at sapien mollis hendrerit. Nam cursus vitae nulla vel feugiat.</p>
+         </div>
+        </div>
+
+          <div class="d219left" style="background:#dcd8d0">
+           <div style="margin:15px;">
+          <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+             <p >Cras dictum, velit vitae elementum aliquet, odio dolor convallis augue, nec interdum nisi eros in velit. Praesent velit lectus, ornare facilisis mollis vel, dignissim vel ipsum.</p>
+         </div>
+        </div>
+
+
+         <div class="d219left" style="margin:0">
+         <img src="czajnik.jpg">
+        </div>
+
+        <!--- the end of 4 modules -->
+
+        <!-- two 219x336 modules-->
+        <div class="d219left" style="background:#FFFFFF;height:336px">
+            <div style="margin:15px;">
+             <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+                <p >Ut in nisi at sapien pellentesque condimentum. Fusce accumsan elit at sapien mollis hendrerit. Nam cursus vitae nulla vel feugiat.</p>
+           </div>
+        </div>
+
+        <div class="d219left" style="background:#dcd8d0;height:336px">
+          <img src="most.jpg">
+           <div style="margin:15px;">
+
+          <div style="font-family: 'Montserrat';text-transform:uppercase"> Lorem Ipsum </div>
+             <p >Cras dictum, velit vitae elementum aliquet, odio dolor convallis augue, nec interdum nisi eros in velit. Praesent velit lectus, ornare facilisis mollis vel, dignissim vel ipsum.</p>
+         </div>
+        </div>
+        <!-- -->
+       <div class="d446left">
+        <div style="margin:15px;color:#FFFFFF">
+           <div style="font-family: 'Montserrat';text-transform:uppercase; "> Lorem Ipsum </div>
+            <div style="font-family: 'Montserrat';font-style:italic; padding-top:7px;padding-bottom:7px"> Lorem Ipsum </div>
+                        <p >Cras dictum, velit vitae elementum aliquet, odio dolor convallis augue, nec interdum nisi eros in velit. Praesent velit lectus, ornare facilisis mollis vel, dignissim vel ipsum.</p>
+
+                          <p >Maecenas nec sollicitudin felis, vel interdum ipsum. Pellentesque vulputate nulla sollicitudin diam euismod vehicula. Ut in quam sapien. Maecenas ut enim ac tortor suscipit aliquam eu vel nisl. Nullam suscipit iaculis nulla ac vestibulum. Etiam facilisis tellus et tristique varius. In eu dui sit amet lacus facilisis sodales. </p>
+                          
+                            <p >Cras dictum, velit vitae elementum aliquet, odio dolor convallis augue, nec interdum nisi eros in velit. Praesent velit lectus, ornare facilisis mollis vel, dignissim vel ipsum.</p>
+        </div>
+       </div>
+       <!-- -->
+       <div class="d900" style="background:#f6f5f3; margin-top:24px; margin-bottom:24px;">
+        <div style="margin:15px">
+
+          <p class="foot-text">Copyright © 2014 Intermediate Capital Group plc</p>
+<p class="foot-text">
+AccessibilityPrivacy and cookies policyLegalSitemapRSSRequest ICG Investor Extranet accessOnline security 
+</p>
+<p class="foot-text">
+This website is for informational purposes only and does not constitute an offer for products or services in any jurisdiction in which such a solicitation would be unlawful or to any person to whom it would be unlawful. Moreover, it neither constitutes an offer to enter into an investment agreement, nor an invitation for such an offer.
+          </p>
+
+        </div>
+       </div>
+   
+
+    </div><!-- the end of content wrapper -->
+</div><!-- the end of wrapper-->
+
+
+    <script src="utils.js"></script>
+    <script src="main.js"></script>
+    
+
+  </body>
+</html>
