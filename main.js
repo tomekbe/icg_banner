@@ -116,13 +116,43 @@
            decodeCanvas3.height = pattern_image3.height;
            dectodeCtx3.drawImage(pattern_image3, 0, 0);
 
-       // start everything happens here;
-        //drawFrame(); 
-       window.slide1 = drawIt(pattern_image);
-       //console.log("--------", slide1.name);
-       window.slide1.timeIt();
-        
+  
+       //window.slide1 = drawIt(pattern_image);
+       //window.slide1.timeIt();
+       //t1offF(); 
       }
+
+      window.startIt = function() {
+          window.slide1 = drawIt(pattern_image);
+          window.slide1.timeIt();
+          t1offF(); 
+      }
+
+      window.loadImages = function(callback) {
+
+      var loaded = false;
+      var loadedNumber = 0;
+        for (var i = 0; i < im_array.length; ++i) {
+            //console.log(im_array[i]);
+            im_array[i].onload = function () {
+              loadedNumber++;
+              if(loadedNumber==im_array.length) {
+                //all loaded now
+                callback();
+              }
+
+            } //the end of onload function
+        };//the end of loop
+
+
+      }
+
+
+       // start everything happens here;
+      loadImages(startIt);
+
+     
+
 
       
 
@@ -424,7 +454,7 @@
 
     
 
-  t1offF();
+ 
 
 var ce = new Event('pokapoka');
 document.addEventListener('pokapoka', function (e) {console.log("-- it becomes visible again --")},false);
