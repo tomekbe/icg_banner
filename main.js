@@ -123,26 +123,26 @@
       }
 
       window.startIt = function() {
-          window.slide1 = drawIt(pattern_image);
+          window.slide1 = drawIt(pattern_image,0,0,0,0);
           window.slide1.timeIt();
           t1offF(); 
       }
 
       window.loadImages = function(callback) {
 
-      var loaded = false;
-      var loadedNumber = 0;
-        for (var i = 0; i < im_array.length; ++i) {
-            //console.log(im_array[i]);
-            im_array[i].onload = function () {
-              loadedNumber++;
-              if(loadedNumber==im_array.length) {
-                //all loaded now
-                callback();
-              }
+          var loaded = false;
+          var loadedNumber = 0;
+            for (var i = 0; i < im_array.length; ++i) {
+                //console.log(im_array[i]);
+                im_array[i].onload = function () {
+                  loadedNumber++;
+                  if(loadedNumber==im_array.length) {
+                    //all loaded now
+                    callback();
+                  }
 
-            } //the end of onload function
-        };//the end of loop
+                } //the end of onload function
+            };//the end of loop
 
 
       }
@@ -160,7 +160,7 @@
 
       // the main engine, pass the reference image which will be drawn on the canvas
   
-      window.drawIt = function(img) {
+      window.drawIt = function(img, xPoint, yPoint, angle, range) {
         
         //console.log("hey")
         this.name ="test name";
@@ -169,14 +169,14 @@
         this.pimage = img;
         this.slide_draw_TO;
 
-        this.xPos = 50;
-        this.yPos = 0;
+        this.xPos = xPoint;
+        this.yPos = yPoint;
 
         this.xPos2 = 0;
         this.yPos2 = 0;
 
-        this.angle =0;
-        this.range =0;
+        this.angle = angle;
+        this.range = range;
         this.r = 550;
 
 
@@ -204,8 +204,9 @@
                         //the bigger the angle increments the faster it happens
                         angle+=0.040;  
 
+                        //console.log("updated xpos", xPos)
                         // undulating the radius of the gradient 
-                        var r = 60 + Math.sin(angle)*50 + 25;
+                        var r = 120 + Math.cos(angle)*30 ;
                       
                         // if off the visible area 
                         if(xPos> 370) {
@@ -292,11 +293,11 @@
           TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
           TweenLite.to(cta1,1, {alpha:1,delay:0})
 
-              x1= 50, y1 = 0; angle =0;
+             //x1= 50, y1 = 0; angle =0;
 
           //drawFrame();
            //window.slide1 = drawIt(pattern_image) ;
-           window.slide1 = drawIt(pattern_image);
+           window.slide1 = drawIt(pattern_image,0,0,0,0);
            window.slide1.timeIt();
            //window.slide1().fun1();
           t1offF();
@@ -345,22 +346,26 @@
           //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
           //pattern_context.drawImage(pattern_image2, 0, 0);
           document.getElementById("banner-h1").innerHTML=" Lorem ipsum <br/> hey"
-          document.getElementById("banner-h1").style.color = "#FFFFFF";
-          document.getElementById("banner-cap").style.color ="#FFFFFF";
-          document.getElementById("banner-cta").style.left="400px";
-          document.getElementById("banner-copy-wrap").style.left="400px";
+          //document.getElementById("banner-h1").style.color = "#FFFFFF";
+          //document.getElementById("banner-cap").style.color ="#FFFFFF";
+          //document.getElementById("banner-cta").style.left="400px";
+          //document.getElementById("banner-copy-wrap").style.left="400px";
 
         TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
         TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
         TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
         TweenLite.to(cta1,1, {alpha:1,delay:0})
 
-        x1= 100, y1 = 0; angle =0;
+        //x1= 100, y1 = 0; angle =0;
+       // window.xPos = 0;
+       //xPos = 0;
+         //yPos = (0) + Math.sin(angle)*(80) + range;
+      // console.log(xPos, "x Position")
           
          // slide2 = drawIt(pattern_image2) 
         //drawFrame2();
         
-        window.slide2 = drawIt(pattern_image2);
+        window.slide2 = drawIt(pattern_image2,100,300,0,40);
         window.slide2.timeIt();
        
        t2offF();
@@ -415,10 +420,11 @@
           TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
           TweenLite.to(cta1,1, {alpha:1,delay:0})
 
-           x1= 50, y1 = 0; angle =0;
+           //x1= 50, y1 = 0; angle =0;
+           xPos =0;
          
           //drawFrame3();
-           window.slide3 = drawIt(pattern_image3);
+           window.slide3 = drawIt(pattern_image3,0,0,0,0);
            window.slide3.timeIt();
          t3offF();
         } , 1000)
