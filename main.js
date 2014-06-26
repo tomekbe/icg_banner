@@ -1,67 +1,51 @@
  window.onload = function () {
 
 
-   
-   //window.banner = {};
-   //window.banner.obrazy  = new Array ("a","b","c");
-   
-   var pattern_canvas = document.getElementById('pattern_canvas'),
-          pattern_context = pattern_canvas.getContext('2d');
 
-   var gradient_canvas = document.getElementById('gradient_canvas'),
-          gradient_context =  gradient_canvas.getContext('2d');
+   // namespace for the banner
+   window.icgbanner = {};
 
-    /*  var gradient_canvas2 = document.getElementById('gradient_canvas2'),
-       gradient_context2  = gradient_canvas2.getContext('2d'); */
+  //->>. gradientt ..<//
+  //gradient code values 
 
-
-
-
-        //->>. gradientt ..<//
-        //gradient code values 
-
-        //x0  The x-coordinate of the starting circle of the gradient
-        //y0  The y-coordinate of the starting circle of the gradient
-        //r0  The radius of the starting circle
+  //x0  The x-coordinate of the starting circle of the gradient
+  //y0  The y-coordinate of the starting circle of the gradient
+  //r0  The radius of the starting circle
         
-        //x1  The x-coordinate of the ending circle of the gradient
-        //y1  The y-coordinate of the ending circle of the gradient
-        //r1  The radius of the ending circle
+  //x1  The x-coordinate of the ending circle of the gradient
+  //y1  The y-coordinate of the ending circle of the gradient
+  //r1  The radius of the ending circle
 
  
 
 
 
-        /*
-          two gradients undulating;
-
-          x1, y1 =   coordinates for 
-        */
+    
         
-        function createGrad(x1,y1,x2,y2,r,ctx) {
+       icgbanner.createGrad = function(x1,y1,x2,y2,r,ctx) {
 
           //console.log('redrawing gradient');
 
           //(x0,y0,r0,x1,y1,r1);
-          var gradient  = ctx.createRadialGradient(x1,y1,3,x1,y1,r);
-          gradient.addColorStop(0,"#FFFFFF");
-          gradient.addColorStop(0.0584,"#FFFFFF");
-          gradient.addColorStop(0.2341,"#00aeef");
-          gradient.addColorStop(0.4476,"#004756");
-          gradient.addColorStop(0.979,'rgba(6,0,0,1)');;
-          gradient.addColorStop(1, 'rgba(0,0,0,1)');
+          icgbanner.gradient  =  ctx.createRadialGradient(x1,y1,3,x1,y1,r);
+          icgbanner.gradient.addColorStop(0,"#FFFFFF");
+          icgbanner.gradient.addColorStop(0.0584,"#FFFFFF");
+          icgbanner.gradient.addColorStop(0.2341,"#00aeef");
+          icgbanner.gradient.addColorStop(0.4476,"#004756");
+          icgbanner.gradient.addColorStop(0.979,'rgba(6,0,0,1)');;
+          icgbanner.gradient.addColorStop(1, 'rgba(0,0,0,1)');
           
-          ctx.fillStyle = gradient;
-          ctx.fillRect(0,0,1075,761);
+         ctx.fillStyle = icgbanner.gradient;
+         ctx.fillRect(0,0,1075,761);
 
           //another gradient gies here 
-          var gradient2  = ctx.createRadialGradient(x2,y2,5,x2,y2,550);
+          /*var gradient2  = ctx.createRadialGradient(x2,y2,5,x2,y2,550);
           gradient2.addColorStop(0,"#FFFFFF");
           gradient2.addColorStop(0.0584,"#FFFFFF");
           gradient2.addColorStop(0.2341,"#00aeef");
           gradient2.addColorStop(0.4476,"#004756");
           gradient2.addColorStop(0.979,'rgba(6,0,0,0)');
-          gradient2.addColorStop(1, 'rgba(0,0,0,0)');
+          gradient2.addColorStop(1, 'rgba(0,0,0,0)'); */
 
 
           //ctx.fillStyle = gradient2;
@@ -76,20 +60,6 @@
 
 
 
-      var pattern_image = new Image();
-      var pattern_image2 = new Image();
-      var pattern_image3 = new Image();
-
-      var im_array = new Array();
-
-      im_array.push (pattern_image,pattern_image2, pattern_image3);
-      //pattern_image.src="ICG_pattern3.png";
-      pattern_image.src="673x336_banner_A.png";
-      pattern_image2.src="673x336_banner_B.png";
-      pattern_image3.src="673x336_banner_C.png";
-
-
-      window.activeTransition="";
       
       
       //initialising if the assets are loaded
@@ -120,21 +90,21 @@
  
       } */
 
-      window.startIt = function() {
-          window.slide1 = drawIt(pattern_image,0,0,0,0);
-          window.slide1.timeIt();
-          t1offF(); 
+       icgbanner.startIt = function() {
+           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,0,0,0);
+           icgbanner.slide1.timeIt();
+           icgbanner.t1offF(); 
       }
 
-      window.loadImages = function(callback) {
+       icgbanner.loadImages = function(callback) {
 
           var loaded = false;
           var loadedNumber = 0;
-            for (var i = 0; i < im_array.length; ++i) {
+            for (var i = 0; i <  icgbanner.im_array.length; ++i) {
                 //console.log(im_array[i]);
-                im_array[i].onload = function () {
+                 icgbanner.im_array[i].onload = function () {
                   loadedNumber++;
-                  if(loadedNumber==im_array.length) {
+                  if(loadedNumber== icgbanner.im_array.length) {
                     //all loaded now
                     callback();
                   }
@@ -146,337 +116,37 @@
       }
 
 
-       // start everything happens here;
+       icgbanner.initialise  = function () {
 
-       if(window.utils.canvasSupport()==true) {
-            loadImages(startIt);
-        } else  {
-          //no support for HTML5//
-          document.getElementById("anim-wrapper").innerHTML="You don't seem to have HTML5 enabled browser";
-        }
 
-     
+         icgbanner.pattern_image = new Image();
+         icgbanner.pattern_image2 = new Image();
+         icgbanner.pattern_image3 = new Image();
 
+         icgbanner.im_array = new Array();
 
-      
+         icgbanner.im_array.push ( icgbanner.pattern_image, icgbanner.pattern_image2,  icgbanner.pattern_image3);
+        //pattern_image.src="ICG_pattern3.png";
+         icgbanner.pattern_image.src="673x336_banner_A.png";
+         icgbanner.pattern_image2.src="673x336_banner_B.png";
+         icgbanner.pattern_image3.src="673x336_banner_C.png";
 
 
+         icgbanner.activeTransition="";
 
-      // the main engine, pass the reference image which will be drawn on the canvas
-  
-      window.drawIt = function(img, xPoint, yPoint, angle, range) {
-        
-        //console.log("hey")
-        this.name ="test name";
-        this.req;
-        //this.pimage = pattern_image;
-        this.pimage = img;
-        this.slide_draw_TO;
+         icgbanner.pattern_canvas = document.getElementById('pattern_canvas');
+         icgbanner.pattern_context =  icgbanner.pattern_canvas.getContext('2d');
 
-        this.xPos = xPoint;
-        this.yPos = yPoint;
+         icgbanner.gradient_canvas = document.getElementById('gradient_canvas');
+         icgbanner.gradient_context =   icgbanner.gradient_canvas.getContext('2d');
 
-        this.xPos2 = 0;
-        this.yPos2 = 0;
+         icgbanner.anim1 = document.getElementById("pattern_canvas");
+         icgbanner.grad1 = document.getElementById("gradient_canvas");
+         icgbanner.slide_copy1 = document.getElementById("banner-copy-wrap")
+         icgbanner.cta1 = document.getElementById("banner-cta");
 
-        this.angle = angle;
-        this.range = range;
-        this.r = 550;
 
-
-        this.timeIt  =  function () {
-
-             this.slide_draw_TO = setTimeout(function() {
-                      
-                        req =  window.requestAnimationFrame(timeIt, pattern_canvas);
-                        
-                        
-                        pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
-                        
-                        //drawing the image
-                        pattern_context.drawImage(pimage, 0, 0);
-                        
-                        gradient_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);  
-                          
-                        
-                        
-                        /*> First gradient animation */
-                        
-
-                        xPos = xPos+0.63;
-                        //vertical range of undulating
-                        yPos = (336/2) + Math.cos(angle)*(80) + range;
-                        //the bigger the angle increments the faster it happens
-                        angle+=0.040;  
-
-                        //console.log("updated xpos", xPos)
-                        // undulating the radius of the gradient 
-                        var r = 180 + Math.cos(angle)*80 ;
-                      
-                        // if off the visible area 
-                        if(xPos> 360) {
-                          angle=0;
-                          xPos= -25;
-
-                        } 
-
-                        /* calling the grad continuously */
-                        createGrad(xPos,yPos,xPos2,yPos2,r,gradient_context);
-                 
-
-                    }, 1000/30);
-
-        },
-        // kills the animation process
-        this.killIt = function () {
-
-            clearTimeout(this.slide_draw_TO);
-            cancelAnimationFrame(this.req);
-            this.req= null; this.slide_draw_TO = null;
-            //console.log("trying to kill the process")
-            //console.log(this.slide_draw_TO,this.req, this.name);
-
-
-        }
-       ,
-
-        
-
-        /*   test */
-        this.fun1 = function () {
-
-          alert("bum");
-       
-
-        } ,
-
-        this.fun2 = function () {
-
-        }
-
-        return this
-
-        
-      }
-
-
-      window.anim1 = document.getElementById("pattern_canvas");
-      window.grad1 = document.getElementById("gradient_canvas");
-      window.slide_copy1 = document.getElementById("banner-copy-wrap")
-      window.cta1 = document.getElementById("banner-cta");
-     // TweenLite.to(foo, 2, {alpha:0});
-
-     // TweenLite.to(anim1, 2, {alpha:0, delay:2});
-   // TweenLite.to(grad1, 2, {alpha:0});
-      //sinus undulating
-
-      //drawFrame();
-        
-      //----------timers , 
-
-    
-    
-// slide 1 on and off
-    
-    window.t1onF = function () {
-
-        window.activeTransition="t1on";
-        window.t1on = setTimeout ( function() {
-
-          //console.log("start the first Slide1");
-          //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
-          //pattern_context.drawImage(pattern_image, 0, 0);
-
-          //document.getElementById("banner-h1").innerHTML=" Slide 1 <br/> hey"
-          //document.getElementById("banner-h1").style.color = "#003745";
-          //document.getElementById("banner-cap").style.color ="#003745";
-          //document.getElementById("banner-cta").style.left="430px";
-          //document.getElementById("banner-copy-wrap").style.left="430px";
-          
-
-         
-        document.getElementById("banner3").style.display ="none";
-        document.getElementById("banner1").style.display ="block";
-
-          TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
-          TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
-          TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-          //TweenLite.to(cta1,1, {alpha:1,delay:0})
-
-             //x1= 50, y1 = 0; angle =0;
-
-          //drawFrame();
-           //window.slide1 = drawIt(pattern_image) ;
-           window.slide1 = drawIt(pattern_image,0,0,0,0);
-           window.slide1.timeIt();
-           //window.slide1().fun1();
-          t1offF();
-        } , 1000)
-
-
-     
-  } 
-
-    window.t1offF =  function () {
-
-
-          window.activeTransition="t1off";
-          window.t1off = setTimeout ( function() {
-
-            //console.log("finish the first Slide1");
-            
-            TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
-            TweenLite.to(grad1, 1, {alpha:0, delay:0});
-            TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            //TweenLite.to(cta1,1, {alpha:0,delay:0})
-            
-
-
-            //clearTimeout(slide1_draw_TO);
-            //cancelAnimationFrame( window.req1 );
-            window.slide1.killIt();
-            window.slide1 = null;
-           t2onF();
-          } , 6000)
-    
-    }
-
-//
-
-
-// slide 2 on and off
-       window.t2onF = function () {
-
-
-        window.activeTransition="t2on";
-        window.t2on = setTimeout ( function() {
-
-          //console.log("start the first Slide2");
-          
-          //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
-          //pattern_context.drawImage(pattern_image2, 0, 0);
-          //document.getElementById("banner-h1").innerHTML=" Lorem ipsum <br/> hey"
-          //document.getElementById("banner-h1").style.color = "#FFFFFF";
-          //document.getElementById("banner-cap").style.color ="#FFFFFF";
-          //document.getElementById("banner-cta").style.left="400px";
-          //document.getElementById("banner-copy-wrap").style.left="400px";
-
-        document.getElementById("banner1").style.display ="none";
-        document.getElementById("banner2").style.display ="block";
-        
-        TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
-        TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
-        TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-        //TweenLite.to(cta1,1, {alpha:1,delay:0})
-
-        //x1= 100, y1 = 0; angle =0;
-       // window.xPos = 0;
-       //xPos = 0;
-         //yPos = (0) + Math.sin(angle)*(80) + range;
-      // console.log(xPos, "x Position")
-          
-         // slide2 = drawIt(pattern_image2) 
-        //drawFrame2();
-        
-        window.slide2 = drawIt(pattern_image2,100,0,0,40);
-        window.slide2.timeIt();
-       
-       t2offF();
-         // t1offF();
-        } , 1000)
-      } 
-
-          window.t2offF =  function () {
-
-
-            window.activeTransition="t2off";
-            window.t2off = setTimeout ( function() {
-
-            //console.log("finish the first Slide1");
-            
-            TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
-            TweenLite.to(grad1, 1, {alpha:0, delay:0});
-            TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            //TweenLite.to(cta1,1, {alpha:0,delay:0})
-            
-            //clearTimeout(slide2_draw_TO);
-            //cancelAnimationFrame( window.req2 );
-            
-            slide2.killIt();
-            window.slide2 = null;
-
-            t3onF();
-          } , 6000)
-    
-    }
-
-    
-
-       window.t3onF = function () {
-
-
-          window.activeTransition="t3on";
-        window.t3on = setTimeout ( function() {
-
-          //console.log("start the slide 3");
-          
-          //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
-          //pattern_context.drawImage(pattern_image3, 0, 0);
-          //document.getElementById("banner-h1").innerHTML=" Slide 3 <br/> hey"
-          //document.getElementById("banner-h1").style.color = "#003745";
-          //document.getElementById("banner-cap").style.color ="#003745";
-          //document.getElementById("banner-cta").style.left="400px";
-          //document.getElementById("banner-copy-wrap").style.left="400px";
-
-        document.getElementById("banner2").style.display ="none";
-        document.getElementById("banner3").style.display ="block";
-
-          TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
-          TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
-          TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-          //TweenLite.to(cta1,1, {alpha:1,delay:0})
-
-           //x1= 50, y1 = 0; angle =0;
-           xPos =0;
-         
-          //drawFrame3();
-           window.slide3 = drawIt(pattern_image3,0,0,0,0);
-           window.slide3.timeIt();
-         t3offF();
-        } , 1000)
-      } 
-
-
-       window.t3offF =  function () {
-
-
-          window.activeTransition="t3off";
-          window.t3off = setTimeout ( function() {
-
-            //console.log("finish the first Slide1");
-            
-            TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
-            TweenLite.to(grad1, 1, {alpha:0, delay:0});
-            TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            //TweenLite.to(cta1,1, {alpha:0,delay:0})
-            
-
-            slide3.killIt();
-            slide3 = null;
-            //clearTimeout(slide3_draw_TO);
-            //cancelAnimationFrame( window.req3 );
-           
-           t1onF();
-          } , 6000)
-    
-    }
-
-
-
-
-
-    
-//***-------------------------------***//
+      //***-------------------------------***//
 // handling the animation with tabs 
 
 var ce = new Event('pokapoka');
@@ -510,24 +180,24 @@ document.addEventListener(visibilityChange, function() {
           document.title ="udih"
     
             // turning the transitioning off
-            switch(window.activeTransition) {
+            switch(icgbanner.activeTransition) {
 
-              case "t1on": clearTimeout(window.t1on);
+              case "t1on": clearTimeout( icgbanner.t1on);
               break;
 
-              case "t1off": clearTimeout(window.t1off);
+              case "t1off": clearTimeout( icgbanner.t1off);
               break;
 
-              case "t2on": clearTimeout(window.t2on);
+              case "t2on": clearTimeout( icgbanner.t2on);
               break;
 
-              case "t2off": clearTimeout(window.t2off);
+              case "t2off": clearTimeout( icgbanner.t2off);
               break;
               
-              case "t3on": clearTimeout(window.t3on);
+              case "t3on": clearTimeout( icgbanner.t3on);
               break;
 
-              case "t3off":clearTimeout(window.t3off);
+              case "t3off":clearTimeout( icgbanner.t3off);
               break;
             }
 
@@ -542,24 +212,24 @@ document.addEventListener(visibilityChange, function() {
      // plays the animaton from a given point in time 
           document.dispatchEvent(ce);
 
-             switch(window.activeTransition) {
+             switch(icgbanner.activeTransition) {
 
-              case "t1on": t1onF()
+              case "t1on":  icgbanner.t1onF()
               break;
 
-              case "t1off": t1offF() 
+              case "t1off":  icgbanner.t1offF() 
               break;
 
-              case "t2on": t2onF();
+              case "t2on":  icgbanner.t2onF();
               break;
 
-              case "t2off": t2offF();
+              case "t2off":  icgbanner.t2offF();
               break;
 
-              case "t3on": t3onF();
+              case "t3on":  icgbanner.t3onF();
               break;
 
-              case "t3off": t3offF();
+              case "t3off":  icgbanner.t3offF();
               break;
 
 
@@ -571,6 +241,316 @@ document.addEventListener(visibilityChange, function() {
 
 
 document.title = document[state];
+
+
+
+  
+      }
+
+
+       // start everything happens here;
+
+       if(window.utils.canvasSupport()==true) {
+             icgbanner.initialise();
+             icgbanner.loadImages(icgbanner.startIt);
+        } else  {
+          //no support for HTML5//
+          document.getElementById("anim-wrapper").innerHTML="<img src=\"fallback.png\">";
+        }
+
+     
+
+
+      
+
+
+
+      // the main engine, pass the reference image which will be drawn on the canvas
+  
+       icgbanner.drawIt = function(img, xPoint, yPoint, angle, range) {
+        
+        //console.log("hey")
+        
+        this.name ="test name";
+        this.req;
+        //this.pimage = pattern_image;
+        this.pimage = img;
+        this.slide_draw_TO;
+
+        this.xPos = xPoint;
+        this.yPos = yPoint;
+
+        this.xPos2 = 0;
+        this.yPos2 = 0;
+
+        this.angle = angle;
+        this.range = range;
+        this.r = 250;
+
+        //console.log(this,"aaaaa", this.name);
+
+
+        this.timeIt  =  function () {
+
+            //console.log(this,"bbbbbb",this.name);
+
+                        icgbanner.slide_draw_TO = setTimeout(function() {
+                      
+                        icgbanner.req =  window.requestAnimationFrame(icgbanner.timeIt,  icgbanner.pattern_canvas);
+                        
+                        
+                         icgbanner.pattern_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);
+                        
+                        //drawing the image
+                         icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
+                        
+                         icgbanner.gradient_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);  
+                          
+                        
+                        
+                        /*> First gradient animation */
+                        
+
+                        icgbanner.xPos = icgbanner.xPos+0.63;
+                        //vertical range of undulating
+                        icgbanner.yPos = (336/2) + Math.cos(icgbanner.angle)*(80) + icgbanner.range;
+                        //the bigger the angle increments the faster it happens
+                        icgbanner.angle+=0.040;  
+
+                        //console.log("updated xpos", xPos)
+                        // undulating the radius of the gradient 
+                        icgbanner.r = 180 + Math.cos(icgbanner.angle)*80 ;
+                      
+                        // if off the visible area 
+                        if(icgbanner.xPos> 360) {
+                          icgbanner.angle=0;
+                          icgbanner.xPos= -25;
+
+                        } 
+
+                        /* calling the grad continuously */
+                        icgbanner.createGrad(icgbanner.xPos,icgbanner.yPos,icgbanner.xPos2,icgbanner.yPos2,icgbanner.r, icgbanner.gradient_context);
+                 
+
+                    }, 1000/30);
+
+        },
+        // kills the animation process
+        this.killIt = function () {
+            //console.log("killing it");
+            clearTimeout(icgbanner.slide_draw_TO);
+            cancelAnimationFrame(icgbanner.req);
+            icgbanner.req= null; icgbanner.slide_draw_TO = null;
+            //console.log("trying to kill the process")
+            //console.log(this.slide_draw_TO,this.req, this.name);
+
+
+        }
+       ,
+
+        
+
+        /*   test */
+        this.fun1 = function () {
+
+          alert("bum");
+       
+
+        } ,
+
+        this.fun2 = function () {
+
+        }
+
+        return this
+
+        
+      }
+
+
+
+     // TweenLite.to(foo, 2, {alpha:0});
+
+     // TweenLite.to(anim1, 2, {alpha:0, delay:2});
+   // TweenLite.to(grad1, 2, {alpha:0});
+      //sinus undulating
+
+      //drawFrame();
+        
+      //----------timers , 
+
+    
+    
+// slide 1 on and off
+    
+     icgbanner.t1onF = function () {
+
+         icgbanner.activeTransition="t1on";
+         icgbanner.t1on = setTimeout ( function() {
+
+         document.getElementById("banner3").style.display ="none";
+          document.getElementById("banner1").style.display ="block";
+
+          TweenLite.to(icgbanner.anim1, 1, {alpha:1, delay:0}); 
+          TweenLite.to(icgbanner.grad1, 1, {alpha:1, delay:0.3});
+          TweenLite.to(icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+          //TweenLite.to(cta1,1, {alpha:1,delay:0})
+
+             //x1= 50, y1 = 0; angle =0;
+
+          //drawFrame();
+           //window.slide1 = drawIt(pattern_image) ;
+          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,0,0,0);
+          icgbanner.slide1.timeIt();
+           //window.slide1().fun1();
+           icgbanner.t1offF();
+        } , 1000)
+
+
+     
+  } 
+
+     icgbanner.t1offF =  function () {
+
+
+           icgbanner.activeTransition="t1off";
+           icgbanner.t1off = setTimeout ( function() {
+
+            //console.log("finish the first Slide1");
+            
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
+            TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
+            
+
+
+            //clearTimeout(slide1_draw_TO);
+            //cancelAnimationFrame( window.req1 );
+             icgbanner.slide1.killIt();
+             icgbanner.slide1 = null;
+             icgbanner.t2onF();
+          } , 6000)
+    
+    }
+
+//
+
+
+// slide 2 on and off
+        icgbanner.t2onF = function () {
+
+
+         icgbanner.activeTransition="t2on";
+       icgbanner.t2on = setTimeout ( function() {
+
+        document.getElementById("banner1").style.display ="none";
+        document.getElementById("banner2").style.display ="block";
+        
+        TweenLite.to( icgbanner.anim1, 1, {alpha:1, delay:0}); 
+        TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.3});
+        TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+        //TweenLite.to(cta1,1, {alpha:1,delay:0})
+
+        //x1= 100, y1 = 0; angle =0;
+       // window.xPos = 0;
+       //xPos = 0;
+         //yPos = (0) + Math.sin(angle)*(80) + range;
+      // console.log(xPos, "x Position")
+          
+         // slide2 = drawIt(pattern_image2) 
+        //drawFrame2();
+        
+         icgbanner.slide2 = icgbanner.drawIt( icgbanner.pattern_image2,100,0,0,40);
+         icgbanner.slide2.timeIt();
+       
+         icgbanner.t2offF();
+         // t1offF();
+        } , 1000)
+      } 
+
+          icgbanner.t2offF =  function () {
+
+
+            icgbanner.activeTransition="t2off";
+            icgbanner.t2off = setTimeout ( function() {
+
+            //console.log("finish the first Slide1");
+            
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
+            TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
+            
+            //clearTimeout(slide2_draw_TO);
+            //cancelAnimationFrame( window.req2 );
+            
+             icgbanner.slide2.killIt();
+             icgbanner.slide2 = null;
+
+             icgbanner.t3onF();
+          } , 6000)
+    
+    }
+
+    
+
+        icgbanner.t3onF = function () {
+
+
+          window.activeTransition="t3on";
+        window.t3on = setTimeout ( function() {
+
+
+        document.getElementById("banner2").style.display ="none";
+        document.getElementById("banner3").style.display ="block";
+
+          TweenLite.to( icgbanner.anim1, 1, {alpha:1, delay:0}); 
+          TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.3});
+          TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+          //TweenLite.to(cta1,1, {alpha:1,delay:0})
+
+           //x1= 50, y1 = 0; angle =0;
+           xPos =0;
+         
+          //drawFrame3();
+           icgbanner.slide3 = icgbanner.drawIt(icgbanner.pattern_image3,0,0,0,0);
+           icgbanner.slide3.timeIt();
+           icgbanner.t3offF();
+        } , 1000)
+      } 
+
+
+       icgbanner.t3offF =  function () {
+
+
+          icgbanner.activeTransition="t3off";
+          icgbanner.t3off = setTimeout ( function() {
+
+            //console.log("finish the first Slide1");
+            
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
+            TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
+            
+
+            icgbanner.slide3.killIt();
+            icgbanner.slide3 = null;
+            //clearTimeout(slide3_draw_TO);
+            //cancelAnimationFrame( window.req3 );
+           
+           icgbanner.t1onF();
+          } , 6000)
+    
+    }
+
+
+
+
+
+    
+
 
 
 }; //the end of window.onload function 

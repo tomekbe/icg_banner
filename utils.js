@@ -23,6 +23,7 @@
 
     if (!window.cancelAnimationFrame)
         window.cancelAnimationFrame = function(id) {
+          //console.log("cancellin animation frame");
             clearTimeout(id);
         };
 
