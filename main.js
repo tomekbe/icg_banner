@@ -184,12 +184,13 @@
 
              this.slide_draw_TO = setTimeout(function() {
                       
-                       req =  window.requestAnimationFrame(timeIt, pattern_canvas);
+                        req =  window.requestAnimationFrame(timeIt, pattern_canvas);
                         
-                        //console.log("tik tok");
+                        
                         pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
                         
-                        pattern_context.drawImage(pimage, 0, 0);      //console.log("ticking away");
+                        //drawing the image
+                        //pattern_context.drawImage(pimage, 0, 0);
                         
                         gradient_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);  
                           
@@ -282,16 +283,21 @@
           //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
           //pattern_context.drawImage(pattern_image, 0, 0);
 
-          document.getElementById("banner-h1").innerHTML=" Slide 1 <br/> hey"
-          document.getElementById("banner-h1").style.color = "#003745";
-          document.getElementById("banner-cap").style.color ="#003745";
-          document.getElementById("banner-cta").style.left="430px";
-          document.getElementById("banner-copy-wrap").style.left="430px";
+          //document.getElementById("banner-h1").innerHTML=" Slide 1 <br/> hey"
+          //document.getElementById("banner-h1").style.color = "#003745";
+          //document.getElementById("banner-cap").style.color ="#003745";
+          //document.getElementById("banner-cta").style.left="430px";
+          //document.getElementById("banner-copy-wrap").style.left="430px";
           
+
+         
+        document.getElementById("banner3").style.display ="none";
+        document.getElementById("banner1").style.display ="block";
+
           TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
           TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
           TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-          TweenLite.to(cta1,1, {alpha:1,delay:0})
+          //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
              //x1= 50, y1 = 0; angle =0;
 
@@ -318,7 +324,7 @@
             TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
             TweenLite.to(grad1, 1, {alpha:0, delay:0});
             TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            TweenLite.to(cta1,1, {alpha:0,delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
             
 
 
@@ -345,16 +351,19 @@
           
           //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
           //pattern_context.drawImage(pattern_image2, 0, 0);
-          document.getElementById("banner-h1").innerHTML=" Lorem ipsum <br/> hey"
+          //document.getElementById("banner-h1").innerHTML=" Lorem ipsum <br/> hey"
           //document.getElementById("banner-h1").style.color = "#FFFFFF";
           //document.getElementById("banner-cap").style.color ="#FFFFFF";
           //document.getElementById("banner-cta").style.left="400px";
           //document.getElementById("banner-copy-wrap").style.left="400px";
 
+        document.getElementById("banner1").style.display ="none";
+        document.getElementById("banner2").style.display ="block";
+        
         TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
         TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
         TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-        TweenLite.to(cta1,1, {alpha:1,delay:0})
+        //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
         //x1= 100, y1 = 0; angle =0;
        // window.xPos = 0;
@@ -384,7 +393,7 @@
             TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
             TweenLite.to(grad1, 1, {alpha:0, delay:0});
             TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            TweenLite.to(cta1,1, {alpha:0,delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
             
             //clearTimeout(slide2_draw_TO);
             //cancelAnimationFrame( window.req2 );
@@ -409,16 +418,19 @@
           
           //pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
           //pattern_context.drawImage(pattern_image3, 0, 0);
-          document.getElementById("banner-h1").innerHTML=" Slide 3 <br/> hey"
-          document.getElementById("banner-h1").style.color = "#003745";
-          document.getElementById("banner-cap").style.color ="#003745";
-          document.getElementById("banner-cta").style.left="400px";
-          document.getElementById("banner-copy-wrap").style.left="400px";
+          //document.getElementById("banner-h1").innerHTML=" Slide 3 <br/> hey"
+          //document.getElementById("banner-h1").style.color = "#003745";
+          //document.getElementById("banner-cap").style.color ="#003745";
+          //document.getElementById("banner-cta").style.left="400px";
+          //document.getElementById("banner-copy-wrap").style.left="400px";
+
+        document.getElementById("banner2").style.display ="none";
+        document.getElementById("banner3").style.display ="block";
 
           TweenLite.to(anim1, 1, {alpha:1, delay:0}); 
           TweenLite.to(grad1, 1, {alpha:1, delay:0.3});
           TweenLite.to(slide_copy1,1 ,{alpha:1, delay:0})
-          TweenLite.to(cta1,1, {alpha:1,delay:0})
+          //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
            //x1= 50, y1 = 0; angle =0;
            xPos =0;
@@ -442,7 +454,7 @@
             TweenLite.to(anim1, 1, {alpha:0, delay:0.6}); 
             TweenLite.to(grad1, 1, {alpha:0, delay:0});
             TweenLite.to(slide_copy1,1 ,{alpha:0, delay:0})
-            TweenLite.to(cta1,1, {alpha:0,delay:0})
+            //TweenLite.to(cta1,1, {alpha:0,delay:0})
             
 
             slide3.killIt();
@@ -460,7 +472,7 @@
 
     
 
- 
+// handling the animation with tabs 
 
 var ce = new Event('pokapoka');
 document.addEventListener('pokapoka', function (e) {console.log("-- it becomes visible again --")},false);

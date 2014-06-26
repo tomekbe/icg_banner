@@ -8,7 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans|Montserrat' rel='stylesheet' type='text/css'>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
     <style>
-you best. If you're more of the copy-and-paste type, or just want an in-page preview of what you'll be getting, here it is.
+
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -81,84 +81,6 @@ table {
 
       width:900px;
       margin: 0 auto;
-    }
-    #anim-wrapper {
-
-     /* border:1px solid black; */
-      position: relative;
-      padding:0; margin:0;
-      width:673px; height:336px;
-      background:#000000;
-      float:left;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
-    #pattern_canvas {
-      position:absolute;
-      z-index:2000;
-    }
-
-    #gradient_canvas2 {
-      position: absolute;
-      z-index: 1998;
-    }
-    #gradient_canvas {
-      position:absolute;
-      z-index: 1999;
-
-    }
-
-    #banner-h1 {
-      //position:absolute;
-      //z-index:2001;
-      color:#003745;
-      top:80px;
-      left:430px;
-      letter-spacing: -0.5px;
-      line-height: 120%;
-      font-size:32px;
-      font-family: 'Montserrat';
-      margin-bottom: 20px;
-
-    }
-    #banner-cap {
-
-      //position: absolute;
-      //z-index: 2002;
-      color:#003745;
-      left:430px;
-      top:205px;
-      font-size:13px;
-       letter-spacing: -0.5px;
-      line-height: 120%;  
-      margin-bottom: 20px;
-      }
-
-    #banner-cta {
-      position: absolute;
-      z-index: 2003;
-      color:#FFF;
-      background:#f04e23;
-      left:430px;
-      top:275px;
-      padding-left:14px;padding-right:14px;
-      padding-top:8px;padding-bottom:8px;
-      letter-spacing: 0px;
-      font-size: 14px;
-
-    }
-
-    #banner-cta a {
-      text-decoration: none;
-    }
-
-    #banner-copy-wrap {
-   
-      position:absolute;
-      left:430px;
-      top:80px;
-      z-index: 2004;
-
     }
 
     .d219right {
@@ -253,6 +175,114 @@ table {
 
     }
 
+    /*---------------------*/
+    /* animated banner css */
+    /*---------------------*/
+
+
+    /* the outer container */
+    #anim-wrapper {
+
+     /* border:1px solid black; */
+      position: relative;
+      padding:0; margin:0;
+      width:673px; height:336px;
+      background:#000000;
+      float:left;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    /*for rendering the png image with alpha transparency */
+    #pattern_canvas {
+      position:absolute;
+      z-index:2000;
+    }
+
+    /*#gradient_canvas2 {
+      position: absolute;
+      z-index: 1998;
+    }*/
+
+
+    /*gradient needs to have lower z-index position than pattern_canvas */
+    #gradient_canvas {
+      position:absolute;
+      z-index: 1999;
+
+    }
+
+    #banner-copy-wrap {
+   
+      position:absolute;
+      left:355px;
+      top:30px;
+      //background:yellow;
+      z-index: 2004;
+
+    }
+
+    .banner-h1 {
+     
+      color:#003745;
+     
+      letter-spacing: -0.5px;
+      line-height: 100%;
+      font-size:36px;
+    
+      font-family: 'PembrokeICG';
+      margin-bottom: 20px;
+      /*background:grey;*/
+
+    }
+    .banner-cap {
+
+     
+      color:#003745;
+      font-size:16px;
+      letter-spacing: -0.5px;
+      line-height: 120%; 
+      margin:0;padding:0; 
+      margin-bottom: 20px;
+      }
+
+    .banner-cta {
+    
+      z-index: 2003;
+      color:#FFF;
+      background:#f04e23;
+      padding-left:14px;padding-right:14px;
+      padding-top:8px;padding-bottom:8px;
+      letter-spacing: 0px;
+      font-size: 13px;
+      float:left;
+
+    }
+
+    #anim-wrapper a {
+      text-decoration: none;
+    }
+
+    #banner1, #banner2, #banner3 {
+      /*background: red;*/
+      display: none;
+    }
+    
+    #banner1 {
+      display:block;
+    }
+
+    /* Display font*/
+    @font-face {
+      font-family: 'PembrokeICG';
+      src: url('fonts/PembrokeICG.eot');
+      src: local('☺'), url('fonts/PembrokeICG.woff') format('woff'), url('fonts/PembrokeICG.ttf') format('truetype'), url('fonts/PembrokeICG.svg') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
+
     </style>
   </head>
   <body>
@@ -273,6 +303,16 @@ table {
 
               </ul></div>
           </div>
+
+
+
+
+
+
+
+
+
+
        
           <!-- anim -->
               <div id="anim-wrapper">
@@ -280,20 +320,77 @@ table {
           
 
                 <canvas id="pattern_canvas" width="673" height="336"></canvas>
-                <div id="banner-copy-wrap">
-                    <div id="banner-h1">The<br/>architecture<br/>of finance </div>
 
-                    <div id="banner-cap">At ICG we look at opportunities across</br>
-                                            the capital structure, to connect</br> 
-                                            businesses to their long-term ambitions. </div>
+                <div id="banner-copy-wrap">
+
+
+                  <!-- banner1 -->
+                  <div id="banner1">
+                      <div class="banner-h1">The<br/>architecture<br/>of finance</div>
+
+                      <div class="banner-cap">At ICG we look at opportunities across</br>
+                                              the capital structure, to connect</br> 
+                                              businesses to their long-term ambitions. 
+                      </div>
 
                    
+                          <a href="https://www.google.co.uk/?search=#q=icg&safe=off" target="_blank">
+                            <div class="banner-cta">
+                            <div class="inside">Find out how</div>
+                          </div>
+                          </a>
+                    
+                  </div>
+                  <!-- end of banner1 -->
+
+                  <!-- banner2 -->
+                  <div id="banner2">
+                      <div class="banner-h1">maximum yield<br/>in a changing<br/>landscape</div>
+
+                      <div class="banner-cap">We create flexible capital for<br/>businesses across the market cycle,
+                      <br/>to suit their long term ambitions. 
+                      </div>
+
+                      <a href="https://www.google.co.uk/?search=#q=icg&safe=off" target="_blank"><div class="banner-cta"> Find out how</div>
+                      </a>
+                  </div>
+                  <!-- end of banner2 -->
+
+                  <!-- banner 3 -->
+                  <div id="banner3">
+                      <div class="banner-h1">local insight<br/>global reach</div>
+
+                      <div class="banner-cap">
+                                              ICG is a global leader in credit markets <br/>
+                                              investing. We use local insights to create <br/>
+                                              the best outcome for our clients.
+                      </div>
+
+                      <a href="https://www.google.co.uk/?search=#q=icg&safe=off" target="_blank"><div class="banner-cta"> Find out how</div>
+                      </a>
+                  </div>
+                  <!-- end of banner 3 -->
+                 
                 </div>
-                 <a href="https://www.google.co.uk/?search=#q=icg&safe=off" target="_blank"><div id="banner-cta"> Find out how</div></a>
+             
 
 
               </div>
           <!-- the end of anim-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- 2 modules -->
 
