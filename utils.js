@@ -47,6 +47,15 @@ window.cancelRequestAnimFrame = ( function() {
 
 window.utils = {};
 
+
+
+//***------***//
+//canvas suppport
+window.utils.canvasSupport = function () {
+    
+    return !!document.createElement('canvas').getContext;
+}
+
 /**
  * Keeps track of the current mouse position, relative to an element.
  * @param {HTMLElement} element

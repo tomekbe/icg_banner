@@ -2,8 +2,8 @@
 
 
    
-   window.banner = {};
-   window.banner.obrazy  = new Array ("a","b","c");
+   //window.banner = {};
+   //window.banner.obrazy  = new Array ("a","b","c");
    
    var pattern_canvas = document.getElementById('pattern_canvas'),
           pattern_context = pattern_canvas.getContext('2d');
@@ -93,7 +93,7 @@
       
       
       //initialising if the assets are loaded
-      pattern_image3.onload = function() {
+     /* pattern_image3.onload = function() {
 
 
           // chrome caching hack
@@ -117,10 +117,8 @@
            dectodeCtx3.drawImage(pattern_image3, 0, 0);
 
   
-       //window.slide1 = drawIt(pattern_image);
-       //window.slide1.timeIt();
-       //t1offF(); 
-      }
+ 
+      } */
 
       window.startIt = function() {
           window.slide1 = drawIt(pattern_image,0,0,0,0);
@@ -149,7 +147,13 @@
 
 
        // start everything happens here;
-      loadImages(startIt);
+
+       if(window.utils.canvasSupport()==true) {
+            loadImages(startIt);
+        } else  {
+          //no support for HTML5//
+          document.getElementById("anim-wrapper").innerHTML="You don't seem to have HTML5 enabled browser";
+        }
 
      
 
@@ -190,7 +194,7 @@
                         pattern_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);
                         
                         //drawing the image
-                        //pattern_context.drawImage(pimage, 0, 0);
+                        pattern_context.drawImage(pimage, 0, 0);
                         
                         gradient_context.clearRect(0, 0, pattern_canvas.width, pattern_canvas.height);  
                           
@@ -199,7 +203,7 @@
                         /*> First gradient animation */
                         
 
-                        xPos = xPos+0.83;
+                        xPos = xPos+0.63;
                         //vertical range of undulating
                         yPos = (336/2) + Math.cos(angle)*(80) + range;
                         //the bigger the angle increments the faster it happens
@@ -207,10 +211,10 @@
 
                         //console.log("updated xpos", xPos)
                         // undulating the radius of the gradient 
-                        var r = 120 + Math.cos(angle)*30 ;
+                        var r = 180 + Math.cos(angle)*80 ;
                       
                         // if off the visible area 
-                        if(xPos> 370) {
+                        if(xPos> 360) {
                           angle=0;
                           xPos= -25;
 
@@ -374,7 +378,7 @@
          // slide2 = drawIt(pattern_image2) 
         //drawFrame2();
         
-        window.slide2 = drawIt(pattern_image2,100,300,0,40);
+        window.slide2 = drawIt(pattern_image2,100,0,0,40);
         window.slide2.timeIt();
        
        t2offF();
@@ -470,8 +474,9 @@
 
 
 
-    
 
+    
+//***-------------------------------***//
 // handling the animation with tabs 
 
 var ce = new Event('pokapoka');
