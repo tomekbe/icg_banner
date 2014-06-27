@@ -23,8 +23,10 @@
     
         
        icgbanner.createGrad = function(x1,y1,x2,y2,r,ctx) {
+          // *** //
+          // createGrad
+          // draws a radial gradient of specified parameters on a supplied context//   
 
-          //console.log('redrawing gradient');
 
           //(x0,y0,r0,x1,y1,r1);
           icgbanner.gradient  =  ctx.createRadialGradient(x1,y1,3,x1,y1,r);
@@ -35,8 +37,8 @@
           icgbanner.gradient.addColorStop(0.979,'rgba(6,0,0,1)');;
           icgbanner.gradient.addColorStop(1, 'rgba(0,0,0,1)');
           
-         ctx.fillStyle = icgbanner.gradient;
-         ctx.fillRect(0,0,1075,761);
+          ctx.fillStyle = icgbanner.gradient;
+          ctx.fillRect(0,0,1075,761);
 
           //another gradient gies here 
           /*var gradient2  = ctx.createRadialGradient(x2,y2,5,x2,y2,550);
@@ -54,10 +56,7 @@
 
         }
 
-        //createGrad(x2,y2,gradient_context2)
-
-      // the endo of gradient codd
-
+  
 
 
       
@@ -116,7 +115,7 @@
       }
 
 
-       icgbanner.initialise  = function () {
+    icgbanner.initialise  = function () {
 
 
          icgbanner.pattern_image = new Image();
@@ -126,7 +125,7 @@
          icgbanner.im_array = new Array();
 
          icgbanner.im_array.push ( icgbanner.pattern_image, icgbanner.pattern_image2,  icgbanner.pattern_image3);
-        //pattern_image.src="ICG_pattern3.png";
+  
          icgbanner.pattern_image.src="673x336_banner_A.png";
          icgbanner.pattern_image2.src="673x336_banner_B.png";
          icgbanner.pattern_image3.src="673x336_banner_C.png";
@@ -144,6 +143,7 @@
          icgbanner.grad1 = document.getElementById("gradient_canvas");
          icgbanner.slide_copy1 = document.getElementById("banner-copy-wrap")
          icgbanner.cta1 = document.getElementById("banner-cta");
+         icgbanner.animwrapper = document.getElementById("anim-wrapper")
 
 
       //***-------------------------------***//
@@ -254,7 +254,7 @@ document.title = document[state];
              icgbanner.initialise();
              icgbanner.loadImages(icgbanner.startIt);
         } else  {
-          //no support for HTML5//
+          //no support for HTML5 replaces it with a static image or gif//
           document.getElementById("anim-wrapper").innerHTML="<img src=\"fallback.png\">";
         }
 
@@ -311,11 +311,11 @@ document.title = document[state];
                         /*> First gradient animation */
                         
 
-                        icgbanner.xPos = icgbanner.xPos+0.63;
+                        icgbanner.xPos = icgbanner.xPos+0.83;
                         //vertical range of undulating
-                        icgbanner.yPos = (336/2) + Math.cos(icgbanner.angle)*(80) + icgbanner.range;
+                        icgbanner.yPos = (336/2) + Math.cos(icgbanner.angle)*(180) + icgbanner.range;
                         //the bigger the angle increments the faster it happens
-                        icgbanner.angle+=0.040;  
+                        icgbanner.angle+=0.050;  
 
                         //console.log("updated xpos", xPos)
                         // undulating the radius of the gradient 
@@ -421,6 +421,8 @@ document.title = document[state];
             TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
+
+            //TweenLite.to (icgbanner.animwrapper,1,{background:"#FFFFFF", delay:0})
             //TweenLite.to(cta1,1, {alpha:0,delay:0})
             
 
@@ -429,7 +431,7 @@ document.title = document[state];
             //cancelAnimationFrame( window.req1 );
              icgbanner.slide1.killIt();
              icgbanner.slide1 = null;
-             icgbanner.t2onF();
+            icgbanner.t2onF();
           } , 6000)
     
     }
@@ -446,7 +448,7 @@ document.title = document[state];
 
         document.getElementById("banner1").style.display ="none";
         document.getElementById("banner2").style.display ="block";
-        
+    
         TweenLite.to( icgbanner.anim1, 1, {alpha:1, delay:0}); 
         TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.3});
         TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
