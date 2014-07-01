@@ -90,9 +90,10 @@
       } */
 
        icgbanner.startIt = function() {
-           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,0,0,0);
+           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,360,0,0);
            icgbanner.slide1.timeIt();
            icgbanner.t1offF(); 
+             //icgbanner.t1onF();
       }
 
        icgbanner.loadImages = function(callback) {
@@ -285,7 +286,7 @@ document.title = document[state];
 
         this.angle = angle;
         this.range = range;
-        this.r = 250;
+        this.r =10;
 
         //console.log(this,"aaaaa", this.name);
 
@@ -296,43 +297,64 @@ document.title = document[state];
 
                         icgbanner.slide_draw_TO = setTimeout(function() {
                       
-                        icgbanner.req =  window.requestAnimationFrame(icgbanner.timeIt,  icgbanner.pattern_canvas);
-                        
-                        
-                         icgbanner.pattern_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);
-                        
-                        //drawing the image
-                         icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
-                        
-                         icgbanner.gradient_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);  
-                          
-                        
-                        
-                        /*> First gradient animation */
-                        
+                             icgbanner.req =  window.requestAnimationFrame(icgbanner.timeIt,  icgbanner.pattern_canvas);
+                            
+                             icgbanner.pattern_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);
+                            
+                            //drawing the image
+                             icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
+                            
+                             icgbanner.gradient_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);  
+                              
+                            
+                            
+                            /*> First gradient animation */
+                            
 
-                        icgbanner.xPos = icgbanner.xPos+0.83;
-                        //vertical range of undulating
-                        icgbanner.yPos = (336/2) + Math.cos(icgbanner.angle)*(180) + icgbanner.range;
-                        //the bigger the angle increments the faster it happens
-                        icgbanner.angle+=0.050;  
+                            /*icgbanner.xPos = icgbanner.xPos+0.83;
+                              //vertical range of undulating
+                              icgbanner.yPos = (336/2) + Math.cos(icgbanner.angle)*(180) + icgbanner.range;
+                              //the bigger the angle increments the faster it happens
+                              icgbanner.angle+=0.050;  
+                              // undulating the radius of the gradient 
+                              icgbanner.r = 180 + Math.cos(icgbanner.angle)*80 ;
+                            
+                              // if off the visible area 
+                              if(icgbanner.xPos> 360) {
+                                icgbanner.angle=0;
+                                icgbanner.xPos= -25;
 
-                        //console.log("updated xpos", xPos)
-                        // undulating the radius of the gradient 
-                        icgbanner.r = 180 + Math.cos(icgbanner.angle)*80 ;
-                      
-                        // if off the visible area 
-                        if(icgbanner.xPos> 360) {
-                          icgbanner.angle=0;
-                          icgbanner.xPos= -25;
+                            } */
+                           
+                            icgbanner.xPos = 150;
+                         
+                            icgbanner.angle+=0.02;  
+                            //icgbanner.r = 240 + Math.sin(icgbanner.angle)*140 ;
+                            //icgbanner.r =icgbanner.r+2.60;
+                            //icgbanner.r = 100 + Math.sin(icgbanner.angle)*300;
+                            //icgbanner.r = ;
+                        
+                            if(icgbanner.r >=450) {
+                              //vr = (350 - icgbanner.r) * 0.03,
+                              //icgbanner.r +=vr;
+                            } else if(icgbanner.r<450) {
 
-                        } 
+                              vr = (3+ icgbanner.r) * 0.04,
+                              icgbanner.r +=vr;
 
-                        /* calling the grad continuously */
-                        icgbanner.createGrad(icgbanner.xPos,icgbanner.yPos,icgbanner.xPos2,icgbanner.yPos2,icgbanner.r, icgbanner.gradient_context);
+                              vy = (icgbanner.yPos+0.2) * 0.01;
+                              icgbanner.yPos -=vy;
+                              console.log(icgbanner.yPos);
+
+                            } 
+                           // icgbanner.yPos = icgbanner.yPos -10;
+                            //icgbanner.yPos =200+ Math.cos(icgbanner.angle)*231;
+
+                            /* calling the grad continuously */
+                            icgbanner.createGrad(icgbanner.xPos,icgbanner.yPos,icgbanner.xPos2,icgbanner.yPos2,icgbanner.r, icgbanner.gradient_context);
                  
 
-                    }, 1000/30);
+                    }, 1000/25);
 
         },
         // kills the animation process
@@ -346,38 +368,14 @@ document.title = document[state];
 
 
         }
-       ,
-
-        
-
-        /*   test */
-        this.fun1 = function () {
-
-          alert("bum");
        
 
-        } ,
-
-        this.fun2 = function () {
-
-        }
-
-        return this
+       return this
 
         
       }
 
 
-
-     // TweenLite.to(foo, 2, {alpha:0});
-
-     // TweenLite.to(anim1, 2, {alpha:0, delay:2});
-   // TweenLite.to(grad1, 2, {alpha:0});
-      //sinus undulating
-
-      //drawFrame();
-        
-      //----------timers , 
 
     
     
@@ -391,16 +389,16 @@ document.title = document[state];
          document.getElementById("banner3").style.display ="none";
           document.getElementById("banner1").style.display ="block";
 
-          TweenLite.to(icgbanner.anim1, 1, {alpha:1, delay:0}); 
-          TweenLite.to(icgbanner.grad1, 1, {alpha:1, delay:0.3});
-          TweenLite.to(icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+          TweenLite.to(icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
+          TweenLite.to(icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+          TweenLite.to(icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
           //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
              //x1= 50, y1 = 0; angle =0;
 
           //drawFrame();
            //window.slide1 = drawIt(pattern_image) ;
-          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,0,0,0);
+          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,360,0,0);
           icgbanner.slide1.timeIt();
            //window.slide1().fun1();
            icgbanner.t1offF();
@@ -416,9 +414,8 @@ document.title = document[state];
            icgbanner.activeTransition="t1off";
            icgbanner.t1off = setTimeout ( function() {
 
-            //console.log("finish the first Slide1");
             
-            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.4}); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
 
@@ -431,7 +428,7 @@ document.title = document[state];
             //cancelAnimationFrame( window.req1 );
              icgbanner.slide1.killIt();
              icgbanner.slide1 = null;
-            icgbanner.t2onF();
+             icgbanner.t2onF();
           } , 6000)
     
     }
@@ -444,14 +441,14 @@ document.title = document[state];
 
 
          icgbanner.activeTransition="t2on";
-       icgbanner.t2on = setTimeout ( function() {
+         icgbanner.t2on = setTimeout ( function() {
 
         document.getElementById("banner1").style.display ="none";
         document.getElementById("banner2").style.display ="block";
     
-        TweenLite.to( icgbanner.anim1, 1, {alpha:1, delay:0}); 
-        TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.3});
-        TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+        TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
+        TweenLite.to( icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+        TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
         //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
         //x1= 100, y1 = 0; angle =0;
@@ -463,7 +460,7 @@ document.title = document[state];
          // slide2 = drawIt(pattern_image2) 
         //drawFrame2();
         
-         icgbanner.slide2 = icgbanner.drawIt( icgbanner.pattern_image2,100,0,0,40);
+         icgbanner.slide2 = icgbanner.drawIt( icgbanner.pattern_image2,100,360,0,40);
          icgbanner.slide2.timeIt();
        
          icgbanner.t2offF();
@@ -479,7 +476,7 @@ document.title = document[state];
 
             //console.log("finish the first Slide1");
             
-            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3}); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
             //TweenLite.to(cta1,1, {alpha:0,delay:0})
@@ -507,16 +504,16 @@ document.title = document[state];
         document.getElementById("banner2").style.display ="none";
         document.getElementById("banner3").style.display ="block";
 
-          TweenLite.to( icgbanner.anim1, 1, {alpha:1, delay:0}); 
-          TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.3});
-          TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:1, delay:0})
+          TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
+          TweenLite.to( icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+          TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
           //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
            //x1= 50, y1 = 0; angle =0;
            xPos =0;
          
           //drawFrame3();
-           icgbanner.slide3 = icgbanner.drawIt(icgbanner.pattern_image3,0,0,0,0);
+           icgbanner.slide3 = icgbanner.drawIt(icgbanner.pattern_image3,0,360,0,0);
            icgbanner.slide3.timeIt();
            icgbanner.t3offF();
         } , 1000)
@@ -531,7 +528,7 @@ document.title = document[state];
 
             //console.log("finish the first Slide1");
             
-            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.6}); 
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3}); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
             //TweenLite.to(cta1,1, {alpha:0,delay:0})
@@ -555,42 +552,4 @@ document.title = document[state];
 
 
 
-}; //the end of window.onload function 
-
-
-
-  /*  (function() {
-    var hidden = "hidden";
-
-    // Standards:
-    if (hidden in document)
-        document.addEventListener("visibilitychange", onchange);
-    else if ((hidden = "mozHidden") in document)
-        document.addEventListener("mozvisibilitychange", onchange);
-    else if ((hidden = "webkitHidden") in document)
-        document.addEventListener("webkitvisibilitychange", onchange);
-    else if ((hidden = "msHidden") in document)
-        document.addEventListener("msvisibilitychange", onchange);
-    // IE 9 and lower:
-    else if ('onfocusin' in document)
-        document.onfocusin = document.onfocusout = onchange;
-    // All others:
-    else
-        window.onpageshow = window.onpagehide 
-            = window.onfocus = window.onblur = onchange;
-
-    function onchange (evt) {
-        var v = 'visible', h = 'hidden',
-            evtMap = { 
-                focus:v, focusin:v, pageshow:v, blur:h, focusout:h, pagehide:h 
-            };
-
-        evt = evt || window.event;
-        if (evt.type in evtMap) {
-            document.body.className = evtMap[evt.type]; window.viz = evtMap[evt.type];
-          }
-        else {        
-            document.body.className = this[hidden] ? "hidden" : "visible";
-          }
-    }
-})(); */
+}; 
