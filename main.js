@@ -90,7 +90,7 @@
       } */
 
        icgbanner.startIt = function() {
-           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,360,0,0);
+           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,330,0,0);
            icgbanner.slide1.timeIt();
            icgbanner.t1offF(); 
              //icgbanner.t1onF();
@@ -301,8 +301,8 @@ document.title = document[state];
                             
                              icgbanner.pattern_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);
                             
-                            //drawing the image
-                             icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
+                             //drawing the image
+                              icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
                             
                              icgbanner.gradient_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);  
                               
@@ -325,30 +325,31 @@ document.title = document[state];
                                 icgbanner.xPos= -25;
 
                             } */
+
+                            /* blocking movement  for slide 1*/
                            
-                            icgbanner.xPos = 150;
-                         
-                            icgbanner.angle+=0.02;  
-                            //icgbanner.r = 240 + Math.sin(icgbanner.angle)*140 ;
-                            //icgbanner.r =icgbanner.r+2.60;
-                            //icgbanner.r = 100 + Math.sin(icgbanner.angle)*300;
-                            //icgbanner.r = ;
-                        
-                            if(icgbanner.r >=450) {
-                              //vr = (350 - icgbanner.r) * 0.03,
-                              //icgbanner.r +=vr;
-                            } else if(icgbanner.r<450) {
+                                icgbanner.angle+=0.07;  
 
-                              vr = (3+ icgbanner.r) * 0.04,
-                              icgbanner.r +=vr;
+                                // radius growing 
+                                if(icgbanner.r >=230) {
+                                  //nothing 
+                                } else if(icgbanner.r<230) {
+                                  vr = (25+ icgbanner.r) * 0.02,
+                                  icgbanner.r +=vr;
+                                } 
+                                // velocity vertical
+                                vy = (icgbanner.yPos+0.1) * 0.011;
+                                icgbanner.yPos -=vy;
+                                
+                                // velocity horizontal 
+                                vx = (icgbanner.xPos-0.02) *0.028 ;
+                                //icgbanner.xPos -= vx;
 
-                              vy = (icgbanner.yPos+0.2) * 0.01;
-                              icgbanner.yPos -=vy;
-                              console.log(icgbanner.yPos);
+                                icgbanner.xPos = (150-vx)- Math.sin(icgbanner.angle)*(80);
 
-                            } 
-                           // icgbanner.yPos = icgbanner.yPos -10;
-                            //icgbanner.yPos =200+ Math.cos(icgbanner.angle)*231;
+
+                            /* end of blocking movement for slide 1 */
+                           
 
                             /* calling the grad continuously */
                             icgbanner.createGrad(icgbanner.xPos,icgbanner.yPos,icgbanner.xPos2,icgbanner.yPos2,icgbanner.r, icgbanner.gradient_context);
@@ -398,7 +399,7 @@ document.title = document[state];
 
           //drawFrame();
            //window.slide1 = drawIt(pattern_image) ;
-          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,360,0,0);
+          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,330,0,0);
           icgbanner.slide1.timeIt();
            //window.slide1().fun1();
            icgbanner.t1offF();
