@@ -302,7 +302,7 @@ document.title = document[state];
                              icgbanner.pattern_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);
                             
                              //drawing the image
-                              icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
+                             icgbanner.pattern_context.drawImage( icgbanner.pimage, 0, 0);
                             
                              icgbanner.gradient_context.clearRect(0, 0,  icgbanner.pattern_canvas.width,  icgbanner.pattern_canvas.height);  
                               
@@ -355,7 +355,7 @@ document.title = document[state];
                             icgbanner.createGrad(icgbanner.xPos,icgbanner.yPos,icgbanner.xPos2,icgbanner.yPos2,icgbanner.r, icgbanner.gradient_context);
                  
 
-                    }, 1000/25);
+                    }, 1000/21);
 
         },
         // kills the animation process
@@ -391,7 +391,7 @@ document.title = document[state];
           document.getElementById("banner1").style.display ="block";
 
           TweenLite.to(icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
-          TweenLite.to(icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+          TweenLite.to(icgbanner.grad1, 1, {alpha:1, delay:0.6});
           TweenLite.to(icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
           //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
@@ -448,7 +448,7 @@ document.title = document[state];
         document.getElementById("banner2").style.display ="block";
     
         TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
-        TweenLite.to( icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+        TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.6});
         TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
         //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
@@ -477,7 +477,7 @@ document.title = document[state];
 
             //console.log("finish the first Slide1");
             
-            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3}); 
+            TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3 }); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
             //TweenLite.to(cta1,1, {alpha:0,delay:0})
@@ -493,7 +493,7 @@ document.title = document[state];
     
     }
 
-    
+ 
 
         icgbanner.t3onF = function () {
 
@@ -506,7 +506,7 @@ document.title = document[state];
         document.getElementById("banner3").style.display ="block";
 
           TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
-          TweenLite.to( icgbanner.grad1, 1.5, {alpha:1, delay:0.3});
+          TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.6});
           TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
           //TweenLite.to(cta1,1, {alpha:1,delay:0})
 
