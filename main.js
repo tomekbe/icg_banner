@@ -90,7 +90,7 @@
       } */
 
        icgbanner.startIt = function() {
-           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,0,330,0,0);
+           icgbanner.slide1 =  icgbanner.drawIt(icgbanner.pattern_image,190,360,0,0);
            icgbanner.slide1.timeIt();
            icgbanner.t1offF(); 
              //icgbanner.t1onF();
@@ -101,8 +101,7 @@
           var loaded = false;
           var loadedNumber = 0;
             for (var i = 0; i <  icgbanner.im_array.length; ++i) {
-                //console.log(im_array[i]);
-                 icgbanner.im_array[i].onload = function () {
+                  icgbanner.im_array[i].onload = function () {
                   loadedNumber++;
                   if(loadedNumber== icgbanner.im_array.length) {
                     //all loaded now
@@ -119,13 +118,15 @@
     icgbanner.initialise  = function () {
 
 
+         // time in milliseconds
+         icgbanner.slideTimer = 10000; 
          icgbanner.pattern_image = new Image();
          icgbanner.pattern_image2 = new Image();
          icgbanner.pattern_image3 = new Image();
 
          icgbanner.im_array = new Array();
 
-         icgbanner.im_array.push ( icgbanner.pattern_image, icgbanner.pattern_image2,  icgbanner.pattern_image3);
+         icgbanner.im_array.push (icgbanner.pattern_image, icgbanner.pattern_image2, icgbanner.pattern_image3);
   
          icgbanner.pattern_image.src="673x336_banner_A.png";
          icgbanner.pattern_image2.src="673x336_banner_B.png";
@@ -151,7 +152,7 @@
 // handling the animation with tabs 
 
 var ce = new Event('pokapoka');
-document.addEventListener('pokapoka', function (e) {console.log("-- it becomes visible again --")},false);
+document.addEventListener('pokapoka', function (e) {},false);
 
 
 var hidden, state, visibilityChange; 
@@ -256,7 +257,7 @@ document.title = document[state];
              icgbanner.loadImages(icgbanner.startIt);
         } else  {
           //no support for HTML5 replaces it with a static image or gif//
-          document.getElementById("anim-wrapper").innerHTML="<img src=\"fallback.png\">";
+          document.getElementById("anim-wrapper").innerHTML="<img src=\"fallback.gif\">";
         }
 
      
@@ -270,9 +271,8 @@ document.title = document[state];
   
        icgbanner.drawIt = function(img, xPoint, yPoint, angle, range) {
         
-        //console.log("hey")
+      
         
-        this.name ="test name";
         this.req;
         //this.pimage = pattern_image;
         this.pimage = img;
@@ -288,12 +288,14 @@ document.title = document[state];
         this.range = range;
         this.r =10;
 
-        //console.log(this,"aaaaa", this.name);
+        this.initX = xPoint;
+        this.initY = yPoint;
+
 
 
         this.timeIt  =  function () {
 
-            //console.log(this,"bbbbbb",this.name);
+            
 
                         icgbanner.slide_draw_TO = setTimeout(function() {
                       
@@ -327,27 +329,27 @@ document.title = document[state];
                             } */
 
                             /* blocking movement  for slide 1*/
-                           
-                                icgbanner.angle+=0.07;  
+                                
+                                //speed of undulation
+                                icgbanner.angle+=(0.07/2);  
 
                                 // radius growing 
                                 if(icgbanner.r >=230) {
                                   //nothing 
                                 } else if(icgbanner.r<230) {
-                                  vr = (25+ icgbanner.r) * 0.02,
+                                  vr = (25+ icgbanner.r) * (0.02/2),
                                   icgbanner.r +=vr;
                                 } 
                                 // velocity vertical
-                                vy = (icgbanner.yPos+0.1) * 0.011;
+                                vy = (icgbanner.yPos+(0.1/2)) * (0.011/2);
                                 icgbanner.yPos -=vy;
                                 
                                 // velocity horizontal 
-                                vx = (icgbanner.xPos-0.02) *0.028 ;
-                                //icgbanner.xPos -= vx;
+                                vx = (icgbanner.xPos-(0.02/2)) * (0.028/2) ;
+                                //moving it to the left with undulation within the range of 80
+                                icgbanner.xPos = (icgbanner.initX-vx)- Math.sin(icgbanner.angle)*(84);
 
-                                icgbanner.xPos = (150-vx)- Math.sin(icgbanner.angle)*(80);
-
-
+                                //console.log(icgbanner.initX);
                             /* end of blocking movement for slide 1 */
                            
 
@@ -360,13 +362,11 @@ document.title = document[state];
         },
         // kills the animation process
         this.killIt = function () {
-            //console.log("killing it");
+            
             clearTimeout(icgbanner.slide_draw_TO);
             cancelAnimationFrame(icgbanner.req);
             icgbanner.req= null; icgbanner.slide_draw_TO = null;
-            //console.log("trying to kill the process")
-            //console.log(this.slide_draw_TO,this.req, this.name);
-
+           
 
         }
        
@@ -399,7 +399,7 @@ document.title = document[state];
 
           //drawFrame();
            //window.slide1 = drawIt(pattern_image) ;
-          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,0,330,0,0);
+          icgbanner.slide1 = icgbanner.drawIt(icgbanner.pattern_image,190,360,0,0);
           icgbanner.slide1.timeIt();
            //window.slide1().fun1();
            icgbanner.t1offF();
@@ -430,7 +430,7 @@ document.title = document[state];
              icgbanner.slide1.killIt();
              icgbanner.slide1 = null;
              icgbanner.t2onF();
-          } , 6000)
+          } , icgbanner.slideTimer )
     
     }
 
@@ -444,28 +444,20 @@ document.title = document[state];
          icgbanner.activeTransition="t2on";
          icgbanner.t2on = setTimeout ( function() {
 
-        document.getElementById("banner1").style.display ="none";
-        document.getElementById("banner2").style.display ="block";
-    
-        TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
-        TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.6});
-        TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
-        //TweenLite.to(cta1,1, {alpha:1,delay:0})
-
-        //x1= 100, y1 = 0; angle =0;
-       // window.xPos = 0;
-       //xPos = 0;
-         //yPos = (0) + Math.sin(angle)*(80) + range;
-      // console.log(xPos, "x Position")
+              document.getElementById("banner1").style.display ="none";
+              document.getElementById("banner2").style.display ="block";
           
-         // slide2 = drawIt(pattern_image2) 
-        //drawFrame2();
-        
-         icgbanner.slide2 = icgbanner.drawIt( icgbanner.pattern_image2,100,360,0,40);
-         icgbanner.slide2.timeIt();
-       
-         icgbanner.t2offF();
-         // t1offF();
+              TweenLite.to( icgbanner.anim1, 1.5, {alpha:1, delay:0}); 
+              TweenLite.to( icgbanner.grad1, 1, {alpha:1, delay:0.6});
+              TweenLite.to( icgbanner.slide_copy1,1.5 ,{alpha:1, delay:0})
+         
+              
+               icgbanner.slide2 = icgbanner.drawIt( icgbanner.pattern_image2,150,260,0,40);
+               icgbanner.slide2.timeIt();
+             
+               icgbanner.t2offF();
+               // t1offF();
+
         } , 1000)
       } 
 
@@ -475,8 +467,7 @@ document.title = document[state];
             icgbanner.activeTransition="t2off";
             icgbanner.t2off = setTimeout ( function() {
 
-            //console.log("finish the first Slide1");
-            
+                      
             TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3 }); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
             TweenLite.to( icgbanner.slide_copy1,1 ,{alpha:0, delay:0})
@@ -489,7 +480,7 @@ document.title = document[state];
              icgbanner.slide2 = null;
 
              icgbanner.t3onF();
-          } , 6000)
+          } , icgbanner.slideTimer )
     
     }
 
@@ -514,7 +505,7 @@ document.title = document[state];
            xPos =0;
          
           //drawFrame3();
-           icgbanner.slide3 = icgbanner.drawIt(icgbanner.pattern_image3,0,360,0,0);
+           icgbanner.slide3 = icgbanner.drawIt(icgbanner.pattern_image3,170,380,0,0);
            icgbanner.slide3.timeIt();
            icgbanner.t3offF();
         } , 1000)
@@ -527,7 +518,7 @@ document.title = document[state];
           icgbanner.activeTransition="t3off";
           icgbanner.t3off = setTimeout ( function() {
 
-            //console.log("finish the first Slide1");
+           
             
             TweenLite.to( icgbanner.anim1, 1, {alpha:0, delay:0.3}); 
             TweenLite.to( icgbanner.grad1, 1, {alpha:0, delay:0});
@@ -541,7 +532,7 @@ document.title = document[state];
             //cancelAnimationFrame( window.req3 );
            
            icgbanner.t1onF();
-          } , 6000)
+          } , icgbanner.slideTimer )
     
     }
 
@@ -554,3 +545,18 @@ document.title = document[state];
 
 
 }; 
+
+
+
+var olo = function (n) {
+   return {
+     name:n,
+     a: function a() {
+        alert("a");
+     } ,
+     b: function b() {
+        alert("b");
+
+     }
+   } // the end of return 
+}
